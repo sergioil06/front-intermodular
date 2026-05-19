@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Tareas — Categorías</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+    <nav>
+        <a href="tareas.html" class="logo">Gestor de Tareas</a>
+        <a href="tareas.html">Tareas</a>
+        <a href="categorias.html" class="activo">Categorías</a>
+        <a href="etiquetas.html">Etiquetas</a>
+        <a href="admin.html" id="link-admin" style="display:none">Admin</a>
+        <span id="nav-usuario"></span>
+        <button id="btn-logout">Cerrar sesión</button>
+    </nav>
+
+    <main>
+        <h1 class="page-title">Categorías</h1>
+
+        <div class="card" id="card-nueva-cat" style="max-width:500px;">
+            <h2>Nueva categoría</h2>
+            <form id="form-categoria">
+                <div class="form-group">
+                    <label for="input-nueva-cat">Nombre</label>
+                    <input type="text" id="input-nueva-cat" placeholder="Nombre de la categoría" required>
+                </div>
+                <div class="btn-row">
+                    <button type="submit" class="btn btn-primary" id="btn-crear-cat">Crear categoría</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Categorías existentes</h2>
+            <ul class="lista-items" id="lista-categorias">
+                <li class="cargando">Cargando...</li>
+            </ul>
+        </div>
+    </main>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="js/config.js"></script>
+    <script src="js/categorias.js"></script>
+</body>
+</html>

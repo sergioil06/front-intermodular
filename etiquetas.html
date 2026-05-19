@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Tareas — Etiquetas</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+    <nav>
+        <a href="tareas.html" class="logo">Gestor de Tareas</a>
+        <a href="tareas.html">Tareas</a>
+        <a href="categorias.html">Categorías</a>
+        <a href="etiquetas.html" class="activo">Etiquetas</a>
+        <a href="admin.html" id="link-admin" style="display:none">Admin</a>
+        <span id="nav-usuario"></span>
+        <button id="btn-logout">Cerrar sesión</button>
+    </nav>
+
+    <main>
+        <h1 class="page-title">Etiquetas</h1>
+
+        <div class="card" style="max-width:500px;">
+            <h2>Nueva etiqueta</h2>
+            <form id="form-etiqueta">
+                <div class="form-group">
+                    <label for="input-nueva-tag">Nombre</label>
+                    <input type="text" id="input-nueva-tag" placeholder="Nombre de la etiqueta" required>
+                </div>
+                <div class="btn-row">
+                    <button type="submit" class="btn btn-primary" id="btn-crear-tag">Crear etiqueta</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Etiquetas existentes</h2>
+            <ul class="lista-items" id="lista-etiquetas">
+                <li class="cargando">Cargando...</li>
+            </ul>
+        </div>
+
+        <div class="card" style="max-width:500px;">
+            <h2>Asignar etiqueta a tarea</h2>
+            <form id="form-asignar">
+                <div class="form-grid">
+                    <div>
+                        <label for="sel-tarea-asignar">Tarea</label>
+                        <select id="sel-tarea-asignar">
+                            <option value="">-- Tarea --</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="sel-tag-asignar">Etiqueta</label>
+                        <select id="sel-tag-asignar">
+                            <option value="">-- Etiqueta --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="btn-row mt-1">
+                    <button type="submit" class="btn btn-primary">Asignar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="card" style="max-width:500px;">
+            <h2>Quitar etiqueta de tarea</h2>
+            <form id="form-quitar">
+                <div class="form-grid">
+                    <div>
+                        <label for="sel-tarea-quitar">Tarea</label>
+                        <select id="sel-tarea-quitar">
+                            <option value="">-- Tarea --</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="sel-tag-quitar">Etiqueta</label>
+                        <select id="sel-tag-quitar" disabled>
+                            <option value="">-- Selecciona una tarea primero --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="btn-row mt-1">
+                    <button type="submit" class="btn btn-danger">Quitar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="js/config.js"></script>
+    <script src="js/etiquetas.js"></script>
+</body>
+</html>

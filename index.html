@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Tareas — Acceso</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="login-page">
+
+    <div class="login-card">
+        <div class="login-logo">
+            <h1>Gestor de <span>Tareas</span></h1>
+            <p>Accede con tu cuenta para continuar</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn activo" id="tab-login">Iniciar sesión</button>
+            <button class="tab-btn" id="tab-registro">Registrarse</button>
+        </div>
+
+        <form id="form-login">
+            <div class="form-group">
+                <label for="login-user">Usuario</label>
+                <input type="text" id="login-user" placeholder="Nombre de usuario" autocomplete="username" required>
+            </div>
+            <div class="form-group">
+                <label for="login-pass">Contraseña</label>
+                <input type="password" id="login-pass" placeholder="Contraseña" autocomplete="current-password" required>
+            </div>
+            <p class="error-form" id="error-login"></p>
+            <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:.5rem;">
+                Entrar
+            </button>
+        </form>
+
+        <form id="form-registro" class="oculto">
+            <div class="form-group">
+                <label for="reg-user">Usuario</label>
+                <input type="text" id="reg-user" placeholder="Elige un nombre de usuario" required>
+            </div>
+            <div class="form-group">
+                <label for="reg-email">Correo electrónico</label>
+                <input type="email" id="reg-email" placeholder="correo@ejemplo.com" required>
+            </div>
+            <div class="form-group">
+                <label for="reg-pass">Contraseña</label>
+                <input type="password" id="reg-pass" placeholder="Mínimo 4 caracteres" required>
+            </div>
+            <div class="form-group">
+                <label for="reg-pass2">Confirmar contraseña</label>
+                <input type="password" id="reg-pass2" placeholder="Repite la contraseña" required>
+            </div>
+            <p class="error-form" id="error-registro"></p>
+            <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:.5rem;">
+                Crear cuenta
+            </button>
+        </form>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

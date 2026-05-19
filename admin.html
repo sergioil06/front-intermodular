@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Tareas — Administración</title>
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+    <nav>
+        <a href="tareas.html" class="logo">Gestor de Tareas</a>
+        <a href="tareas.html">Tareas</a>
+        <a href="categorias.html">Categorías</a>
+        <a href="etiquetas.html">Etiquetas</a>
+        <a href="admin.html" class="activo" id="link-admin">Admin</a>
+        <span id="nav-usuario"></span>
+        <button id="btn-logout">Cerrar sesión</button>
+    </nav>
+
+    <main>
+        <h1 class="page-title">Panel de administración</h1>
+
+        <div class="card">
+            <h2>Gestión de usuarios</h2>
+            <p class="muted" style="margin-bottom:1rem;">
+                Como administrador puedes promover usuarios a GESTOR o degradarlos de vuelta a USER.
+            </p>
+            <div class="tabla-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Usuario</th>
+                            <th>Rol</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lista-usuarios">
+                        <tr><td colspan="4" class="cargando">Cargando usuarios...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="btn-row mt-2">
+                <button class="btn btn-secondary" onclick="cargarUsuarios()">Recargar</button>
+            </div>
+        </div>
+    </main>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="js/config.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
