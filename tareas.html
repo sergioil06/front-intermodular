@@ -10,87 +10,40 @@
 
     <nav>
         <a href="tareas.html" class="logo">Gestor de Tareas</a>
-        <a href="tareas.html" class="activo">Tareas</a>
-        <a href="categorias.html">Categorías</a>
-        <a href="etiquetas.html">Etiquetas</a>
-        <a href="admin.html" id="link-admin" style="display:none">Admin</a>
-        <span id="nav-usuario"></span>
-        <button class="btn-tema" id="btn-tema">Tema</button>
-        <button id="btn-logout">Cerrar sesión</button>
+        <div class="sidebar-links">
+            <a href="tareas.html" class="activo">Tareas</a>
+            <a href="categorias.html">Categorías</a>
+            <a href="etiquetas.html">Etiquetas</a>
+            <a href="admin.html" id="link-admin" style="display:none">Admin</a>
+        </div>
+        <div class="sidebar-footer">
+            <span id="nav-usuario"></span>
+            <button class="btn-tema" id="btn-tema">Tema</button>
+            <button id="btn-logout">Cerrar sesión</button>
+        </div>
     </nav>
 
     <main>
-        <h1 class="page-title">Mis tareas</h1>
-
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-numero" id="dash-total">—</div>
-                <div class="stat-label">Total</div>
+        <div class="page-header">
+            <div class="page-header-left">
+                <h1 class="page-title">Mis tareas</h1>
+                <div class="stats-inline">
+                    <span id="dash-total">—</span> tareas
+                    <span class="stat-sep">·</span>
+                    <span id="dash-completadas" class="stat-ok">—</span> completadas
+                    <span class="stat-sep">·</span>
+                    <span id="dash-pendientes" class="stat-warn">—</span> pendientes
+                    <span class="stat-sep">·</span>
+                    <span id="dash-alta" class="stat-danger">—</span> alta prioridad
+                </div>
             </div>
-            <div class="stat-card stat-completadas">
-                <div class="stat-numero" id="dash-completadas">—</div>
-                <div class="stat-label">Completadas</div>
-            </div>
-            <div class="stat-card stat-pendientes">
-                <div class="stat-numero" id="dash-pendientes">—</div>
-                <div class="stat-label">Pendientes</div>
-            </div>
-            <div class="stat-card stat-alta">
-                <div class="stat-numero" id="dash-alta">—</div>
-                <div class="stat-label">Alta prioridad</div>
+            <div class="page-header-actions">
+                <button class="btn btn-secondary btn-sm-nav" id="btn-cargar">Recargar</button>
+                <button class="btn btn-primary" id="btn-nueva-tarea">Nueva tarea</button>
             </div>
         </div>
 
         <div class="card">
-            <h2 id="titulo-formulario">Nueva tarea</h2>
-            <form id="form-tarea">
-                <div class="form-grid">
-                    <div class="full">
-                        <label for="input-titulo">Título *</label>
-                        <input type="text" id="input-titulo" placeholder="Título de la tarea" required>
-                    </div>
-                    <div class="full">
-                        <label for="input-descripcion">Descripción</label>
-                        <input type="text" id="input-descripcion" placeholder="Descripción opcional">
-                    </div>
-                    <div>
-                        <label for="input-fecha">Fecha límite *</label>
-                        <input type="datetime-local" id="input-fecha" required>
-                    </div>
-                    <div>
-                        <label for="input-prioridad">Prioridad</label>
-                        <select id="input-prioridad">
-                            <option value="">Sin prioridad</option>
-                            <option value="ALTA">Alta</option>
-                            <option value="MEDIA">Media</option>
-                            <option value="BAJA">Baja</option>
-                        </select>
-                    </div>
-                    <div class="full">
-                        <label for="input-categoria">Categoría</label>
-                        <select id="input-categoria">
-                            <option value="">Sin categoría</option>
-                        </select>
-                    </div>
-                    <div class="full" id="grupo-tags-form">
-                        <label for="input-tags">Etiquetas <span class="muted">(opcional · Ctrl+clic para varias)</span></label>
-                        <select id="input-tags" multiple size="3" style="height:auto;"></select>
-                    </div>
-                </div>
-                <p class="error-form" id="error-form"></p>
-                <div class="btn-row">
-                    <button type="submit" class="btn btn-primary" id="btn-guardar">Crear tarea</button>
-                    <button type="button" class="btn btn-secondary oculto" id="btn-cancelar">Cancelar</button>
-                </div>
-            </form>
-        </div>
-
-        <div class="card">
-            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:.5rem; margin-bottom:1rem;">
-                <h2 style="margin-bottom:0">Lista de tareas</h2>
-                <button class="btn btn-secondary" id="btn-cargar">Recargar</button>
-            </div>
-
             <div class="filtros-bar">
                 <input type="text" id="filtro-busqueda" placeholder="Buscar por título o descripción...">
                 <select id="filtro-estado">
@@ -141,6 +94,55 @@
             </div>
         </div>
     </main>
+
+    <div class="form-overlay oculto" id="form-overlay">
+        <div class="form-panel">
+            <div class="form-panel-header">
+                <h2 id="titulo-formulario">Nueva tarea</h2>
+                <button class="btn-cerrar-panel" id="btn-cerrar-panel" type="button">&times;</button>
+            </div>
+            <form id="form-tarea">
+                <div class="form-group">
+                    <label for="input-titulo">Título *</label>
+                    <input type="text" id="input-titulo" placeholder="Título de la tarea" required>
+                </div>
+                <div class="form-group">
+                    <label for="input-descripcion">Descripción</label>
+                    <input type="text" id="input-descripcion" placeholder="Descripción opcional">
+                </div>
+                <div class="form-grid">
+                    <div>
+                        <label for="input-fecha">Fecha límite *</label>
+                        <input type="datetime-local" id="input-fecha" required>
+                    </div>
+                    <div>
+                        <label for="input-prioridad">Prioridad</label>
+                        <select id="input-prioridad">
+                            <option value="">Sin prioridad</option>
+                            <option value="ALTA">Alta</option>
+                            <option value="MEDIA">Media</option>
+                            <option value="BAJA">Baja</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input-categoria">Categoría</label>
+                    <select id="input-categoria">
+                        <option value="">Sin categoría</option>
+                    </select>
+                </div>
+                <div class="form-group" id="grupo-tags-form">
+                    <label for="input-tags">Etiquetas <span class="muted">(Ctrl+clic para varias)</span></label>
+                    <select id="input-tags" multiple size="3"></select>
+                </div>
+                <p class="error-form" id="error-form"></p>
+                <div class="btn-row">
+                    <button type="submit" class="btn btn-primary" id="btn-guardar">Crear tarea</button>
+                    <button type="button" class="btn btn-secondary" id="btn-cancelar">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <div class="toast" id="toast"></div>
 

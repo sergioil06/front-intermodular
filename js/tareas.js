@@ -1,5 +1,3 @@
-// ========== FASE 1-5 del PDF + funcionalidades extra ==========
-
 let tareaEditando = null;
 let todasLasTareas = [];
 let categorias = [];
@@ -12,10 +10,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     await Promise.all([cargarCategorias(), cargarEtiquetasForm()]);
     await cargarTareas();
 
-    // Botón cargar (Fase 1 y 2 del PDF)
     document.getElementById("btn-cargar").addEventListener("click", cargarTareas);
+    document.getElementById("btn-nueva-tarea").addEventListener("click", abrirFormulario);
+    document.getElementById("btn-cerrar-panel").addEventListener("click", cerrarFormulario);
+    document.getElementById("form-overlay").addEventListener("click", (e) => {
+        if (e.target === document.getElementById("form-overlay")) cerrarFormulario();
+    });
 
-    // Formulario crear/editar (Fase 3 del PDF)
     document.getElementById("form-tarea").addEventListener("submit", async (e) => {
         e.preventDefault();
         if (tareaEditando) {
@@ -25,18 +26,25 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    // Cancelar edición
     document.getElementById("btn-cancelar").addEventListener("click", cancelarEdicion);
 
-    // Filtros y búsqueda (sección 3.6 del PDF)
     document.getElementById("filtro-busqueda").addEventListener("input", filtrarTareas);
     document.getElementById("filtro-estado").addEventListener("change", filtrarTareas);
     document.getElementById("filtro-prioridad").addEventListener("change", filtrarTareas);
     document.getElementById("ordenar-por").addEventListener("change", filtrarTareas);
 
-    // Logout
     document.getElementById("btn-logout").addEventListener("click", logout);
 });
+
+function abrirFormulario() {
+    document.getElementById("form-overlay").classList.remove("oculto");
+    document.getElementById("input-titulo").focus();
+}
+
+function cerrarFormulario() {
+    document.getElementById("form-overlay").classList.add("oculto");
+    cancelarEdicion();
+}
 
 // ===== FASE 1 y 2: GET tareas y pintar DOM =====
 async function cargarTareas() {
@@ -203,7 +211,7 @@ async function crearTarea() {
         }
 
         showToast(`Tarea "${data.title}" creada correctamente.`);
-        limpiarFormulario();
+        cerrarFormulario();
         await cargarTareas();
         actualizarDashboard();
     } catch (err) {
@@ -252,10 +260,9 @@ function abrirEdicion(id) {
     const tituloForm = document.getElementById("titulo-formulario");
     tituloForm.textContent = "Editar tarea";
     document.getElementById("btn-guardar").textContent = "Guardar cambios";
-    document.getElementById("btn-cancelar").classList.remove("oculto");
     const grupoTags = document.getElementById("grupo-tags-form");
     if (grupoTags) grupoTags.style.display = "none";
-    document.getElementById("form-tarea").scrollIntoView({ behavior: "smooth" });
+    abrirFormulario();
 }
 
 async function editarTarea(id) {
@@ -288,7 +295,7 @@ async function editarTarea(id) {
         });
         if (!res.ok) throw new Error(`Error ${res.status}`);
         showToast("Tarea actualizada correctamente.");
-        cancelarEdicion();
+        cerrarFormulario();
         await cargarTareas();
         actualizarDashboard();
     } catch (err) {
@@ -331,7 +338,6 @@ function cancelarEdicion() {
     limpiarFormulario();
     document.getElementById("titulo-formulario").textContent = "Nueva tarea";
     document.getElementById("btn-guardar").textContent = "Crear tarea";
-    document.getElementById("btn-cancelar").classList.add("oculto");
     const grupoTags = document.getElementById("grupo-tags-form");
     if (grupoTags) grupoTags.style.display = "";
 }
